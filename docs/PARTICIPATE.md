@@ -6,14 +6,16 @@ vault, `SeatVaultV4` (`0xb1c3a04496238D62E3c93118C297163855e22192`, $50 lines), 
 2026-09-29 and takes no new seats since 2026-10-09. Addresses are in [`deployments/4663.v2.json`](../deployments/4663.v2.json), and the SDK and the
 `priors-v2` CLI read them from there, so nothing below needs an address typed by hand.
 
-The same actions are on the site: [priors.trade](https://priors.trade) has a Participate page (deposit, seats,
-roots), [/agent](https://priors.trade/agent) and [/invite](https://priors.trade/invite).
+The same actions are on the site: [priors.trade](https://priors.trade) has a Participate page (deposit, seats),
+[/agent](https://priors.trade/agent) and [/invite](https://priors.trade/invite). A Go mode account runs a root from its
+Account, under "Back an agent" ([go.priors.trade/account](https://go.priors.trade/account)); any other wallet calls
+`enrollRoot` on the pool directly.
 
 | Who | How they take part | Entry point |
 |---|---|---|
 | Lender | Deposit USDG into the pool, earn the lenders' share of every fee, withdraw | Participate page · `PriorsV2.deposit/withdraw` |
 | Staker | Put a seat of $PRIORS behind an agent; the seat vault backs it; earn the sponsor share of its fees (no new seats since 2026-10-09: the seats already open run until they close) | Participate page · `PriorsV2.offer/closeSeat/claimSeatFees` |
-| Backer | Run a root: stake USDG, vouch for agents (with their owner's signed consent), earn sponsor fees | Participate page · `PriorsV2.enrollRoot/vouchWithConsent/claimSponsorFees` |
+| Backer | Run a root: stake USDG, vouch for agents (with their owner's signed consent), earn sponsor fees | Go mode's Account, "Back an agent" · `PriorsV2.enrollRoot/vouchWithConsent/claimSponsorFees` |
 | Agent | Register, get a line (a treasury invite, the Ethos lane, the owner's own $PRIORS on SeatVaultV5, a backer, or a stock line against its own stock tokens), borrow and repay, pay x402 APIs on credit | `priors-v2` CLI · `PriorsV2` · [FLOAT.md](FLOAT.md) |
 
 ## What changed from v1
